@@ -23,8 +23,12 @@ const SubCategoryUpdate = lazy(() =>
   import("./Pages/Admin/SubCategory/SubCategoryUpdate")
 );
 const ProductCreate = lazy(() => import("./Pages/Admin/Product/ProductCreate"));
-const ProductAttributeCreate = lazy(() => import("./Pages/Admin/ProductAttribute/ProductAttibuteCreate"))
-const ProductAttributeUpdate = lazy(() => import("./Pages/Admin/ProductAttribute/ProductAttributeUpdate"))
+const ProductAttributeCreate = lazy(() =>
+  import("./Pages/Admin/ProductAttribute/ProductAttibuteCreate")
+);
+const ProductAttributeUpdate = lazy(() =>
+  import("./Pages/Admin/ProductAttribute/ProductAttributeUpdate")
+);
 import AuthProtectedUser from "./components/Routes/AuthProtected";
 import "bootswatch/dist/lux/bootstrap.min.css";
 import { Toaster } from "react-hot-toast";
@@ -32,7 +36,7 @@ import { Toaster } from "react-hot-toast";
 import "./App.css";
 import styled from "styled-components";
 import { KitSpinner } from "./kit";
-
+import PrivacyPolicy from "./Pages/Privacypolicy";
 
 console.log(import.meta.env.NODE_ENV);
 
@@ -43,11 +47,11 @@ function App() {
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (res) => {
       if (res) {
-        const { accessToken,photoURL} = res;
+        const { accessToken, photoURL } = res;
 
         currentUser(accessToken)
           .then((res) => {
-            console.log("current user response", res)
+            console.log("current user response", res);
             dispatch(
               LOGGED_IN_USER({
                 name: res.data.name,
@@ -155,6 +159,7 @@ function App() {
             <Route path="password-reset" element={<PasswordReset />} />
             <Route path="/auth" element={<Auth />} />
             {/** user route start */}
+            <Route path="privacypolicy" element={<PrivacyPolicy />} />
 
             <Route
               path="/user"
